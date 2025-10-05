@@ -78,5 +78,46 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+
+
+
+const About = mongoose.model(
+  'About',
+  new mongoose.Schema({
+    title: { type: String, default: 'About Us' },
+    authorName: String,
+    imageUrl: String,        
+    paragraphs: [String],
+    updatedAt: { type: Date, default: Date.now }
+  }, { collection: 'about' })
+);
+
+
+app.post('/api/about/url', async (req, res) => {
+  const { authorName, imageUrl, paragraphs } = req.body || {};
+  const doc = await About.findOneAndUpdate(
+    {},
+    {
+      title: 'About Us',
+      authorName: 'Maya Felix',
+      imageUrl,
+      paragraphs: Array.isArray(paragraphs) ? paragraphs : []
+    },
+    { new: true, upsert: true }
+  );
+  res.json(doc);
+
+});
+
+
+app.get('/api/about', async (_req, res) => {
+  const doc = await About.findOne({});
+  if (!doc) return res.json({ title: 'About Us', paragraphs: [] });
+  res.json(doc);
+
+});
+
+
+
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!
