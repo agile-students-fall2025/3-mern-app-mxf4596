@@ -5,6 +5,7 @@ export default function AboutUs() {
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  
   useEffect(() => {
     fetch("http://localhost:5002/api/about") 
       .then(async (r) => {

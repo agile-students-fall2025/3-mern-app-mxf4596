@@ -110,14 +110,14 @@ app.post('/api/about/url', async (req, res) => {
 });
 
 
+
+
 app.get('/api/about', async (_req, res) => {
   const doc = await About.findOne({});
   if (!doc) return res.json({ title: 'About Us', paragraphs: [] });
   res.json(doc);
 
 });
-
-
 
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!

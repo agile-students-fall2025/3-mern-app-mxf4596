@@ -31,5 +31,6 @@ const Header = props => {
   )
 }
 
+
 // make this component available to be imported into any other file
 export default Header
