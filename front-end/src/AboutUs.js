@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
 export default function AboutUs() {
-  // start with a safe default so renders never crash
   const [data, setData] = useState({ title: "About Us", paragraphs: [] });
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5002/api/about") // or "/api/about" if you added a proxy
+    fetch("http://localhost:5002/api/about") 
       .then(async (r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const ct = r.headers.get("content-type") || "";
